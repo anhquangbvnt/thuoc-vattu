@@ -12,6 +12,7 @@ class CreateCategoriesTable extends Migration
             $table->increments('id');
             $table->string('name', 100);
             $table->tinyInteger('deleted')->default(0);
+            $table->tinyInteger('type');
             $table->string('created_by', 20)->default('System');
             $table->string('updated_by', 20)->default('System');
             $table->timestamps();

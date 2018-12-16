@@ -1,6 +1,5 @@
 @extends('admin.layouts.master')
 @section('content')
-
     <div id="page-wrapper">
         <div class="container-fluid">
             <div class="row">
@@ -15,8 +14,8 @@
                             <h2>Thêm chuyên mục</h2>
                         </div>
                         <div class="body">
-                            <form id="basic-form" method="post" novalidate="" action="">
-
+                            <form id="basic-form" method="post" novalidate="" action="{{route('admin.add_category')}}">
+                                @csrf
                                 <div class="form-group">
                                     <label>Tên chuyên mục</label>
                                     <input type="text" class="form-control" required="true" name="cat-name">
@@ -24,10 +23,10 @@
                                 <div class="form-group">
                                     <label>Loại Danh mục</label>
                                     <label class="radio-inline">
-                                        <input name="rdoStatus" value="1" checked="" type="radio">Thuốc
+                                        <input name="cat-loai" value="0" checked="" type="radio">Thuốc
                                     </label>
                                     <label class="radio-inline">
-                                        <input name="rdoStatus" value="2" type="radio">Vật tư y tế
+                                        <input name="cat-loai" value="1" type="radio">Vật tư y tế
                                     </label>
                                 </div>
                                 <button type="submit" class="btn btn-warning"><i class="fa fa-plus-square"></i><span>   Thêm chuyên mục</span></button>
@@ -51,20 +50,20 @@
                             <td>Tên chuyên mục</td>
                             <td>Hành động</td>
                             </thead>
-
+                            @foreach($cats as $cat)
                             <tr>
-                                <td> id</td>
-                                <td>name</td>
+                                <td> {{$cat -> id}}</td>
+                                <td>{{$cat -> name}}</td>
                                 <td>
                                     <a href="">
-                                        <button type="button" class="btn btn-info" title="Edit"><i class="fa fa-edit"></i></button>
+                                        <button type="button" class="btn btn-info" title="Edit"><i class="fa fa-edit"> Sửa </i></button>
                                     </a>
                                     <a href="">
-                                        <button type="button" data-type="confirm" class="btn btn-danger js-sweetalert" title="Delete"><i class="fa fa-trash-o"></i></button>
+                                        <button type="button" data-type="confirm" class="btn btn-danger js-sweetalert" title="Delete"><i class="fa fa-trash-o">Xóa</i></button>
                                     </a>
                                 </td>
                             </tr>
-
+                            @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -83,19 +82,21 @@
                             <td>Tên chuyên mục</td>
                             <td>Hành động</td>
                             </thead>
+                            {{--@foreach($vattu as $cat)--}}
 
                             <tr>
-                                <td> id</td>
-                                <td>name</td>
+                                {{--<td> {{$cat -> id}}</td>--}}
+                                {{--<td>{{$cat -> name}}</td>--}}
                                 <td>
                                     <a href="">
-                                        <button type="button" class="btn btn-info" title="Edit"><i class="fa fa-edit"></i></button>
+                                        <button type="button" class="btn btn-info" title="Edit"><i class="fa fa-edit">Sửa</i></button>
                                     </a>
                                     <a href="">
-                                        <button type="button" data-type="confirm" class="btn btn-danger js-sweetalert" title="Delete"><i class="fa fa-trash-o"></i></button>
+                                        <button type="button" data-type="confirm" class="btn btn-danger js-sweetalert" title="Delete"><i class="fa fa-trash-o">Xóa</i></button>
                                     </a>
                                 </td>
                             </tr>
+                                {{--@endforeach--}}
 
                             </tbody>
                         </table>
