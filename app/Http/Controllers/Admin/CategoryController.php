@@ -8,15 +8,10 @@ use App\Model\Category;
 
 class CategoryController extends Controller
 {
-//    public function index()
-//    {
-//        $cats = Categories::where('deleted', 0)->get();
-//        return view ('admin.pages.list_category', ['cats' => $cats]);
-//    }
+
     public function index()
     {
         $cats = Category::where('deleted', 0)->get();
-//        $cats = Category::where('deleted', 0)->get();
 
         return view('admin.pages.list_category', ['cats' => $cats]);
     }

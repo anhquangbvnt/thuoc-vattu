@@ -69,40 +69,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6 col-md-12">
-                <div class="card">
-                    <div class="header">
-                        <h2>Danh sách chuyên mục Vật tư y tế</h2>
-                    </div>
-                    <div class="body table-responsive">
-                        <table class="table table-hover m-b-0">
-                            <tbody>
-                            <thead>
-                            <td>Stt.</td>
-                            <td>Tên chuyên mục</td>
-                            <td>Hành động</td>
-                            </thead>
-                            {{--@foreach($vattu as $cat)--}}
 
-                            <tr>
-                                {{--<td> {{$cat -> id}}</td>--}}
-                                {{--<td>{{$cat -> name}}</td>--}}
-                                <td>
-                                    <a href="">
-                                        <button type="button" class="btn btn-info" title="Edit"><i class="fa fa-edit">Sửa</i></button>
-                                    </a>
-                                    <a href="">
-                                        <button type="button" data-type="confirm" class="btn btn-danger js-sweetalert" title="Delete"><i class="fa fa-trash-o">Xóa</i></button>
-                                    </a>
-                                </td>
-                            </tr>
-                                {{--@endforeach--}}
-
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 
