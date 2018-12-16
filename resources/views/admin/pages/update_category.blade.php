@@ -34,6 +34,24 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-lg-6 col-md-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2>Cập nhật chuyên mục</h2>
+                        </div>
+                        <div class="body">
+                            <form id="basic-form" method="post" novalidate="" action="{{route('admin.update_category')}}">
+                                @csrf
+                                <div class="form-group">
+                                    <label>Tên chuyên mục</label>
+                                    <input type="text" class="form-control" required="" name="cat-name" value="{{$updateCat->name}}">
+                                    <input type="hidden" class="form-control" required="" name="cat-id" value="{{$updateCat->id}}">
+                                </div>
+                                <button type="submit" class="btn btn-primary"><i class="fa fa-plus-square"></i><span>   Cập nhật</span></button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="row clearfix">
@@ -63,12 +81,7 @@
                                         <button type="button" data-type="confirm" class="btn btn-danger js-sweetalert" title="Delete"><i class="fa fa-trash-o">Xóa</i></button>
                                     </a>
 
-                                    {{--<a href="">--}}
-                                        {{--<button type="button" class="btn btn-info" title="Edit"><i class="fa fa-edit"> Sửa </i></button>--}}
-                                    {{--</a>--}}
-                                    {{--<a href="">--}}
-                                        {{--<button type="button" data-type="confirm" class="btn btn-danger js-sweetalert" title="Delete"><i class="fa fa-trash-o">Xóa</i></button>--}}
-                                    {{--</a>--}}
+
                                 </td>
                             </tr>
                             @endforeach
@@ -77,6 +90,7 @@
                     </div>
                 </div>
             </div>
+
 
         </div>
     </div>

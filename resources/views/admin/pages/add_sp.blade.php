@@ -11,73 +11,152 @@
             </div>
             <!-- /.col-lg-12 -->
             <div class="col-lg-7" style="padding-bottom:120px">
-                <form action="" method="POST">
+                <form action="{{route('admin.add_sp_post')}}" method="POST"  >
+                    @csrf
                     <div class="form-group">
                         <label>Tên Sản phẩm</label>
-                        <input class="form-control" name="txtName" placeholder="Nhập tên sản phẩm" />
+                        <input class="form-control" name="name" required="true" value="{{old('name')}}" placeholder="Nhập tên sản phẩm" />
+                        <span class="error">
+                                        @if ($errors->get('name'))
+                                @foreach($errors->get('name') as $error)
+                                    <div class="ui pointing red basic label">
+                                                  {{ $error }}
+                                                </div>
+                                @endforeach
+                            @endif
+                                    </span>
                     </div>
                     <div class="form-group">
                         <label>Giá Nhập</label>
-                        <input class="form-control" name="txtPrice" placeholder="Giá nhập vào" />
+                        <input class="form-control" name="price_in" value="{{old('price_in')}}" placeholder="Giá nhập vào" />
+                        <span class="error">
+                                        @if ($errors->get('price_in'))
+                                @foreach($errors->get('price_in') as $error)
+                                    <div class="ui pointing red basic label">
+                                                  {{ $error }}
+                                                </div>
+                                @endforeach
+                            @endif
+                                    </span>
                     </div>
                     <div class="form-group">
                         <label>Giá Bán</label>
-                        <input class="form-control" name="txtPrice" placeholder="Giá bán ra" />
+                        <input class="form-control" name="price_out" value="{{old('price_out')}}" placeholder="Giá bán ra" />
+                        <span class="error">
+                                        @if ($errors->get('price_out'))
+                                @foreach($errors->get('price_out') as $error)
+                                    <div class="ui pointing red basic label">
+                                                  {{ $error }}
+                                                </div>
+                                @endforeach
+                            @endif
+                                    </span>
                     </div>
                     <div class="form-group">
                         <label>Giá Khuyến mãi</label>
-                        <input class="form-control" name="txtPrice" placeholder="Giá khuyến mãi" />
+                        <input class="form-control" name="price_sell" value="{{old('price_sell')}}" placeholder="Giá khuyến mãi" />
+                        <span class="error">
+                                        @if ($errors->get('price_sell'))
+                                @foreach($errors->get('price_sell') as $error)
+                                    <div class="ui pointing red basic label">
+                                                  {{ $error }}
+                                                </div>
+                                @endforeach
+                            @endif
+                                    </span>
+                    </div>
+                    <div class="form-group">
+                        <label>Hãng sản xuất</label>
+                        <input class="form-control" name="brand-name" value="{{old('brand-name')}}" placeholder="Hãng sản xuất - nhập khẩu" />
                     </div>
 
                     <div class="form-group">
                         <label>Ảnh đại diện</label>
                         <div class="body">
-                            <input type="file" class="dropify" name="feature-image">
+                            <input type="file" class="dropify" name="feature-image" onchange="preview_images()">
                         </div>
                         <span class="error">
-
+                                        @if ($errors->get('feature-image'))
+                                @foreach($errors->get('feature-image') as $error)
+                                    <div class="ui pointing red basic label">
+                                                  {{ $error }}
+                                                </div>
+                                @endforeach
+                            @endif
                                     </span>
                     </div>
                     <div class="form-group">
                         <label>Ảnh sản phẩm (4 ảnh)</label>
                         <input type="file" class="form-control" id="product-image" name="photos[]" multiple onchange="preview_images()"/>
                         <span class="error">
-
+                                        @if ($errors->get('photos'))
+                                @foreach($errors->get('photos') as $error)
+                                    <div class="ui pointing red basic label">
+                                                  {{ $error }}
+                                                </div>
+                                @endforeach
+                            @endif
                                     </span>
                         <div class="row" id="image_preview"></div>
                     </div>
                     <div class="form-group">
                         <label>Danh mục</label>
                         <select name="category" id="category" class="form-control">
+                            <option value=""></option>
+                            @foreach($cats as $cat)
+                                @if ($cat->id == old('category'))
+                                    <option selected="selected" value="{{$cat->id}}">{{$cat->name}}</option>
+                                @else
+                                    <option value="{{$cat->id}}">{{$cat->name}}</option>
+                                @endif
+                            @endforeach
+
                         </select>
+                        <span class="error">
+                                        @if ($errors->get('category'))
+                                @foreach($errors->get('category') as $error)
+                                    <div class="ui pointing red basic label">
+                                                  {{ $error }}
+                                                </div>
+                                @endforeach
+                            @endif
+                        </span>
 
                     </div>
             <div class="form-group">
                 <label>Số lượng</label>
                 <input type="text" class="form-control" name="stock" value="">
                 <span class="error">
-
-                                    </span>
+                                        @if ($errors->get('stock'))
+                        @foreach($errors->get('stock') as $error)
+                            <div class="ui pointing red basic label">
+                                                  {{ $error }}
+                                                </div>
+                        @endforeach
+                    @endif
+                </span>
             </div>
                     <div class="form-group">
-                        <label>Tag Key</label>
-                        <input class="form-control" name="txtOrder" placeholder="Please Enter Category Keywords" />
+                        <label>Hạn sử dụng</label>
+                        <input class="form-control" name="exp_date" type="date" />
                     </div>
             <div class="form-group">
                 <label>Mô tả sản phẩm ( nhập mô tả sản phẩm và cách sử dụng)</label>
-                <textarea class="form-control" rows="3" name="txtContent"></textarea>
+                <textarea class="form-control" rows="3" name="description"></textarea>
+                <span class="error">
+                    @if ($errors->get('brand-name'))
+                        @foreach($errors->get('brand-name') as $error)
+                            <div class="ui pointing red basic label">
+                                                  {{ $error }}
+                                                </div>
+                        @endforeach
+                    @endif
+                </span>
             </div>
-                    <div class="form-group">
-                        <label>Product Description</label>
-                        <textarea class="form-control" rows="3"></textarea>
-                    </div>
 
-            <div class="form-group">
-                <label>Giá Khuyến mãi</label>
-                <input class="form-control" name="txtPrice" placeholder="Giá khuyến mãi" />
-            </div>
-                    <button type="submit" class="btn btn-default">Product Add</button>
-                    <button type="reset" class="btn btn-default">Reset</button>
+
+
+                    <button type="submit" class="btn btn-default">Thêm Sản Phẩm</button>
                     <form>
             </div>
         </div>

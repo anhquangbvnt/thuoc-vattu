@@ -37,4 +37,34 @@ class CategoryController extends Controller
      return redirect()->route('admin.list_category');
 
     }
+    public function update(Request $request, $id = null)
+    {
+        if ($request->method() == 'POST') {
+            $catId = $request->input('cat-id');
+            $cat = Category::find($catId);
+
+            if ($cat) {
+                $cat->name = $request->input('cat-name');
+                $cat->save();
+            }
+
+            return redirect()->route('admin.list_category');
+        }
+
+        $cats = Category::all();
+        $updateCat = Category::find($id);
+
+        return view('admin.pages.update_category', [
+            'cats' => $cats,
+            'updateCat' => $updateCat
+        ]);
+    }
+    public function delete($id)
+    {
+        $cat = Category::find($id);
+        $cat->deleted = 1;
+        $cat->save();
+
+        return redirect()->route('admin.list_category');
+    }
 }
